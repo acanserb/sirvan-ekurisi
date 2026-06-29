@@ -4,23 +4,11 @@ export type Discipline =
   | 'Damızlık'
   | 'Pony'
 
-export type HorseLevelTag =
-  | 'Yeni Başlayanlar İçin'
-  | 'Çocuklar İçin'
-  | 'İleri Seviye'
-  | 'Güven Veren Eğitim Atı'
-
 export interface Horse {
   id: string
   slug: string
   name: string
-  age: number
-  breed: string
   discipline: Discipline
-  levelTag: HorseLevelTag
-  height?: string
-  shortBio: string
-  story?: string
   traits?: string[]
   image: string
   alt: string
