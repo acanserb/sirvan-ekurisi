@@ -21,7 +21,7 @@ export default function HorsesShowcase() {
                   her karakterin bir hikayesi var.
                 </>
               }
-              description="ONYX, CANELLO ve Orion. Her biri özenle seçilmiş, bakılmış ve eğitilmiş partnerler."
+              description="ONYX ve CANELLO. Her biri özenle seçilmiş, bakılmış ve eğitilmiş partnerler."
               invert
               size="xl"
             />
