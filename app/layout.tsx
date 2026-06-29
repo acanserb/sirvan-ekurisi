@@ -5,6 +5,7 @@ import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/layout/WhatsAppButton'
 import StickyContactBar from '@/components/layout/StickyContactBar'
 import JsonLd from '@/components/seo/JsonLd'
+import { GoogleTagManager } from '@next/third-parties/google'
 import { localBusinessJsonLd, organizationJsonLd, createMetadata } from '@/lib/seo'
 import './globals.css'
 
@@ -42,6 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${inter.variable} ${playfair.variable}`}
       suppressHydrationWarning
     >
+      <GoogleTagManager gtmId="GTM-WRNRXBCB" />
       <head>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link rel="dns-prefetch" href="https://www.google.com" />
