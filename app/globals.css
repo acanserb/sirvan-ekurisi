@@ -1,0 +1,177 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-ink: #1b1b1b;
+    --color-tan: #8b6f47;
+    --color-cream: #f5f2ed;
+    --color-white: #ffffff;
+  }
+
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+
+  body {
+    @apply bg-cream text-ink font-sans antialiased;
+    font-feature-settings: 'ss01', 'cv11';
+    font-weight: 400;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display text-ink;
+    font-feature-settings: 'lnum' 1, 'ss01' 1;
+    font-weight: 400;
+  }
+
+  /* Subtle drop-caps & italic emphasis used in display headlines */
+  em {
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  ::selection {
+    background: var(--color-tan);
+    color: var(--color-white);
+  }
+
+  a { text-decoration: none; color: inherit; }
+  img { max-width: 100%; height: auto; }
+
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: var(--color-cream); }
+  ::-webkit-scrollbar-thumb { background: var(--color-tan); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-ink); }
+
+  :focus-visible {
+    outline: 2px solid var(--color-tan);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Mobile-first input zoom guard */
+  input, textarea, select { font-size: 16px; }
+}
+
+@layer components {
+  .section-padding {
+    @apply py-24 md:py-36 lg:py-46;
+  }
+
+  .section-padding-sm {
+    @apply py-16 md:py-24 lg:py-30;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-4 text-[11px] uppercase tracking-wider-3 font-medium text-tan-600;
+  }
+
+  .eyebrow::before {
+    content: '';
+    @apply h-px w-12 bg-tan-600;
+  }
+
+  .eyebrow-clean {
+    @apply inline-block text-[11px] uppercase tracking-wider-3 font-medium text-tan-600;
+  }
+
+  .luxury-hover {
+    @apply transition-all duration-700 ease-out-expo;
+  }
+
+  .glass {
+    background: rgba(245, 242, 237, 0.08);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid rgba(245, 242, 237, 0.12);
+  }
+
+  .glass-light {
+    background: rgba(27, 27, 27, 0.04);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+  }
+
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+
+  .skeleton {
+    @apply bg-gradient-to-r from-cream-200 via-cream-100 to-cream-200 bg-[length:1000px_100%] animate-shimmer;
+  }
+
+  /* Editorial under-line that grows on hover */
+  .underline-grow {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 500ms cubic-bezier(0.16, 1, 0.3, 1);
+    padding-bottom: 2px;
+  }
+  .underline-grow:hover { background-size: 100% 1px; }
+
+  /* Persistent editorial underline */
+  .editorial-link {
+    @apply relative inline-flex items-center gap-3 text-[13px] uppercase tracking-wider-2 font-medium;
+  }
+  .editorial-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    height: 1px;
+    width: 100%;
+    background-color: currentColor;
+    transform-origin: right;
+    transform: scaleX(1);
+    transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .editorial-link:hover::after {
+    transform-origin: left;
+    transform: scaleX(1);
+  }
+
+  /* Display headline refined hyphenation */
+  .display-headline {
+    @apply font-display text-balance;
+    hyphens: manual;
+  }
+
+  /* Vertical decorative rule used in editorial layouts */
+  .rule-vertical {
+    @apply block w-px self-stretch bg-current opacity-20;
+  }
+}
+
+@layer utilities {
+  .mask-fade-bottom {
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  }
+
+  .pause-on-hover:hover { animation-play-state: paused; }
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Generous editorial column rhythm */
+  .editorial-stack > * + * { margin-top: clamp(1.25rem, 1.5vw + 0.75rem, 2rem); }
+}
