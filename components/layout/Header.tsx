@@ -67,14 +67,15 @@ export default function Header() {
   const transparent = onHome && !scrolled && !open
 
   return (
-    <header
-      className={cn(
-        'fixed inset-x-0 top-0 z-50 transition-all duration-700 ease-out-expo',
-        transparent
-          ? 'bg-gradient-to-b from-ink/55 via-ink/20 to-transparent'
-          : 'bg-ink/95 backdrop-blur-md shadow-[0_1px_0_0_rgba(245,242,237,0.06)]',
-      )}
-    >
+    <>
+      <header
+        className={cn(
+          'fixed inset-x-0 top-0 z-50 transition-all duration-700 ease-out-expo',
+          transparent
+            ? 'bg-gradient-to-b from-ink/55 via-ink/20 to-transparent'
+            : 'bg-ink/95 backdrop-blur-md shadow-[0_1px_0_0_rgba(245,242,237,0.06)]',
+        )}
+      >
       <div className="container">
         <div className="flex h-20 items-center justify-between gap-6 md:h-24">
           <Link
@@ -160,6 +161,7 @@ export default function Header() {
           </div>
         </div>
       </div>
+      </header>
 
       <AnimatePresence>
         {open ? (
@@ -237,7 +239,7 @@ export default function Header() {
           </motion.div>
         ) : null}
       </AnimatePresence>
-    </header>
+    </>
   )
 }
 
