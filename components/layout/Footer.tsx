@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Instagram, Facebook, Youtube, ArrowUpRight } from 'lucide-react'
 import { CONTACT, NAV_ITEMS, SITE, SOCIAL } from '@/lib/constants'
+import TrackedLink from '@/components/ui/TrackedLink'
 
 export default function Footer() {
   const year = 2026
@@ -59,9 +60,9 @@ export default function Footer() {
               <ul className="mt-6 space-y-4 text-sm leading-relaxed text-cream/80">
                 <li>{CONTACT.address.full}</li>
                 <li>
-                  <a href={CONTACT.phoneHref} className="transition-colors hover:text-tan-200">
+                  <TrackedLink track="phone_click" href={CONTACT.phoneHref} className="transition-colors hover:text-tan-200">
                     {CONTACT.phone}
-                  </a>
+                  </TrackedLink>
                 </li>
                 <li>
                   <a href={`mailto:${CONTACT.email}`} className="transition-colors hover:text-tan-200">

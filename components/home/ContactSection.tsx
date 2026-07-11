@@ -2,6 +2,7 @@ import { Mail, MapPin, MessageCircle, Phone } from 'lucide-react'
 import SectionTitle from '@/components/ui/SectionTitle'
 import FadeIn from '@/components/ui/FadeIn'
 import ContactForm from '@/components/sections/ContactForm'
+import TrackedLink from '@/components/ui/TrackedLink'
 import { CONTACT } from '@/lib/constants'
 
 export default function ContactSection() {
@@ -26,8 +27,8 @@ export default function ContactSection() {
 
             <ul className="mt-14 space-y-6 text-sm">
               <ContactRow icon={<MapPin className="size-4" />} title="Adres" value={CONTACT.address.full} href={CONTACT.mapsLink} external />
-              <ContactRow icon={<Phone className="size-4" />} title="Telefon" value={CONTACT.phone} href={CONTACT.phoneHref} />
-              <ContactRow icon={<MessageCircle className="size-4" />} title="WhatsApp" value="Anında mesaj gönderin" href={CONTACT.whatsappHref} external />
+              <ContactRow icon={<Phone className="size-4" />} title="Telefon" value={CONTACT.phone} href={CONTACT.phoneHref} track="phone_click" />
+              <ContactRow icon={<MessageCircle className="size-4" />} title="WhatsApp" value="Anında mesaj gönderin" href={CONTACT.whatsappHref} external track="whatsapp_click" />
               <ContactRow icon={<Mail className="size-4" />} title="E-posta" value={CONTACT.email} href={`mailto:${CONTACT.email}`} />
             </ul>
           </FadeIn>
@@ -58,12 +59,14 @@ function ContactRow({
   value,
   href,
   external,
+  track,
 }: {
   icon: React.ReactNode
   title: string
   value: string
   href?: string
   external?: boolean
+  track?: 'phone_click' | 'whatsapp_click'
 }) {
   const inner = (
     <li className="group flex items-start gap-5 border-b border-cream/15 pb-5 transition-colors hover:text-tan-200">
@@ -77,11 +80,20 @@ function ContactRow({
     </li>
   )
   if (href) {
-    return (
-      <a href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined} className="block">
-        {inner}
-      </a>
-    )
+    const anchorProps = {
+      href,
+      target: external ? '_blank' : undefined,
+      rel: external ? 'noopener noreferrer' : undefined,
+      className: 'block',
+    }
+    if (track) {
+      return (
+        <TrackedLink track={track} {...anchorProps}>
+          {inner}
+        </TrackedLink>
+      )
+    }
+    return <a {...anchorProps}>{inner}</a>
   }
   return inner
 }

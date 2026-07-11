@@ -7,6 +7,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Menu, X, ArrowUpRight, Phone } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { NAV_ITEMS, CONTACT, SITE } from '@/lib/constants'
+import { trackPhoneClick } from '@/lib/analytics'
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -226,6 +227,7 @@ export default function Header() {
                 </a>
                 <a
                   href={CONTACT.phoneHref}
+                  onClick={trackPhoneClick}
                   className="inline-flex items-center justify-center gap-2 border border-cream/20 px-6 py-4 text-[11px] uppercase tracking-wider-2 text-cream"
                 >
                   <Phone className="size-3.5" />

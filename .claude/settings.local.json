@@ -2,7 +2,12 @@
   "permissions": {
     "allow": [
       "Bash(npx tsc *)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(git -C /Users/macbook/Desktop/Projeler/sirvan-ekurisi status)",
+      "Bash(git -C /Users/macbook/Desktop/Projeler rev-parse --show-toplevel)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)"
     ]
   }
 }

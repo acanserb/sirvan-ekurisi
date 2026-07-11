@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { ArrowRight, CheckCircle2 } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
+import { trackLead } from '@/lib/analytics'
 
 interface FormState {
   name: string
@@ -50,6 +51,7 @@ export default function ContactForm({ variant = 'dark', title, subtitle }: Props
     setStatus('sending')
     setTimeout(() => {
       setStatus('sent')
+      trackLead()
       setForm(initial)
     }, 700)
   }

@@ -2,6 +2,7 @@ import { Mail, MapPin, MessageCircle, Phone, Clock } from 'lucide-react'
 import PageHero from '@/components/ui/PageHero'
 import FadeIn from '@/components/ui/FadeIn'
 import ContactForm from '@/components/sections/ContactForm'
+import TrackedLink from '@/components/ui/TrackedLink'
 import JsonLd from '@/components/seo/JsonLd'
 import { createMetadata, breadcrumbJsonLd } from '@/lib/seo'
 import { CONTACT } from '@/lib/constants'
@@ -45,19 +46,20 @@ export default function IletisimPage() {
                 </a>
               </Row>
               <Row icon={<Phone className="size-4" />} title="Telefon">
-                <a href={CONTACT.phoneHref} className="text-[15px] text-ink/80 underline-grow">
+                <TrackedLink track="phone_click" href={CONTACT.phoneHref} className="text-[15px] text-ink/80 underline-grow">
                   {CONTACT.phone}
-                </a>
+                </TrackedLink>
               </Row>
               <Row icon={<MessageCircle className="size-4" />} title="WhatsApp">
-                <a
+                <TrackedLink
+                  track="whatsapp_click"
                   href={CONTACT.whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[15px] text-ink/80 underline-grow"
                 >
                   Hemen mesaj gönderin
-                </a>
+                </TrackedLink>
               </Row>
               <Row icon={<Mail className="size-4" />} title="E-posta">
                 <a href={`mailto:${CONTACT.email}`} className="text-[15px] text-ink/80 underline-grow">

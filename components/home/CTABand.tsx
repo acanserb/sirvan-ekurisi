@@ -1,5 +1,6 @@
 import { ArrowUpRight, Phone } from 'lucide-react'
 import FadeIn from '@/components/ui/FadeIn'
+import TrackedLink from '@/components/ui/TrackedLink'
 import { CONTACT } from '@/lib/constants'
 
 export default function CTABand() {
@@ -29,13 +30,14 @@ export default function CTABand() {
               <span>Deneme Dersi Talep Et</span>
               <ArrowUpRight className="size-4 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>
-            <a
+            <TrackedLink
+              track="phone_click"
               href={CONTACT.phoneHref}
               className="inline-flex items-center gap-2 text-[11px] uppercase tracking-wider-2 text-cream/85 transition-colors hover:text-cream"
             >
               <Phone className="size-3.5" aria-hidden />
               veya bizi arayın · {CONTACT.phone}
-            </a>
+            </TrackedLink>
           </div>
         </FadeIn>
       </div>

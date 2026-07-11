@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { CONTACT } from '@/lib/constants'
+import { trackWhatsappClick } from '@/lib/analytics'
 
 export default function WhatsAppButton() {
   return (
@@ -10,6 +11,7 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="WhatsApp ile iletişime geç"
+      onClick={trackWhatsappClick}
       initial={{ opacity: 0, scale: 0.6, y: 20 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ delay: 1.2, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}

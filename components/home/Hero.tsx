@@ -1,5 +1,6 @@
 import { ArrowRight, Phone } from 'lucide-react'
 import SmartImage from '@/components/ui/SmartImage'
+import TrackedLink from '@/components/ui/TrackedLink'
 import { CONTACT, SITE } from '@/lib/constants'
 
 export default function Hero() {
@@ -112,7 +113,8 @@ export default function Hero() {
             />
           </a>
 
-          <a
+          <TrackedLink
+            track="whatsapp_click"
             href={CONTACT.whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
@@ -120,7 +122,7 @@ export default function Hero() {
           >
             <Phone className="size-3.5" aria-hidden />
             WhatsApp İletişim
-          </a>
+          </TrackedLink>
         </div>
 
         {/* Inline contact line — readable, no longer fading into image */}
@@ -128,12 +130,13 @@ export default function Hero() {
           className="mt-12 flex animate-hero-in flex-col items-start gap-2 text-[11px] uppercase tracking-wider-2 text-cream/75 md:flex-row md:items-center md:gap-6"
           style={{ textShadow: '0 1px 8px rgba(0,0,0,0.4)', animationDelay: '0.7s' }}
         >
-          <a
+          <TrackedLink
+            track="phone_click"
             href={CONTACT.phoneHref}
             className="underline-grow transition-colors hover:text-tan-200"
           >
             {CONTACT.phone}
-          </a>
+          </TrackedLink>
           <span className="hidden md:inline" aria-hidden>·</span>
           <span>{CONTACT.address.district} / {CONTACT.address.city}</span>
         </div>

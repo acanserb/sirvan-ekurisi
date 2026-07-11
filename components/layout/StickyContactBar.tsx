@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Phone, MessageCircle } from 'lucide-react'
 import { CONTACT } from '@/lib/constants'
+import { trackPhoneClick, trackWhatsappClick } from '@/lib/analytics'
 
 export default function StickyContactBar() {
   const [visible, setVisible] = useState(false)
@@ -27,6 +28,7 @@ export default function StickyContactBar() {
         >
           <a
             href={CONTACT.phoneHref}
+            onClick={trackPhoneClick}
             className="flex items-center justify-center gap-2 py-4 text-[11px] uppercase tracking-wider-2 text-cream transition-colors active:bg-tan-600"
           >
             <Phone className="size-4" aria-hidden />
@@ -36,6 +38,7 @@ export default function StickyContactBar() {
             href={CONTACT.whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={trackWhatsappClick}
             className="flex items-center justify-center gap-2 border-l border-cream/10 bg-[#25D366] py-4 text-[11px] uppercase tracking-wider-2 text-white"
           >
             <MessageCircle className="size-4" aria-hidden />
