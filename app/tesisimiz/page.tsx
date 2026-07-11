@@ -15,6 +15,7 @@ export const metadata = createMetadata({
 })
 
 export default function TesisimizPage() {
+  const features = facilityFeatures.filter((f) => f.id !== 'f-01')
   return (
     <>
       <JsonLd
@@ -33,7 +34,7 @@ export default function TesisimizPage() {
 
       <section className="section-padding bg-cream">
         <div className="container space-y-32 md:space-y-46">
-          {facilityFeatures.map((f, i) => (
+          {features.map((f, i) => (
             <FadeIn key={f.id} direction="up" delay={i * 0.05}>
               <div className={`grid items-center gap-12 lg:gap-20 ${i % 2 === 1 ? 'lg:grid-cols-[1fr_1.3fr]' : 'lg:grid-cols-[1.3fr_1fr]'}`}>
                 <div className={i % 2 === 1 ? 'lg:order-2' : ''}>
@@ -52,7 +53,7 @@ export default function TesisimizPage() {
                 </div>
                 <div className={i % 2 === 1 ? 'lg:order-1' : ''}>
                   <p className="font-mono text-[11px] tracking-wider-2 text-tan-600">
-                    0{i + 1} / 0{facilityFeatures.length}
+                    0{i + 1} / 0{features.length}
                   </p>
                   <SectionTitle title={f.title} description={f.description} className="mt-5" size="md" />
                 </div>
