@@ -20,7 +20,7 @@ export const CONTACT = {
   whatsappNumber: '905060698118',
   whatsappHref:
     'https://wa.me/905060698118?text=Merhaba%2C%20%C5%9Eirvan%20Ek%C3%BCrisi%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum.',
-  email: 'info@sirvanekurisi.com',
+  email: 'sirvanecurie@gmail.com',
   address: {
     street: 'Beştepe, Alparslan Türkeş Cd. No:8',
     district: 'Yenimahalle',

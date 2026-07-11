@@ -5,6 +5,7 @@ import { ArrowRight, CheckCircle2 } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { trackLead } from '@/lib/analytics'
+import { CONTACT } from '@/lib/constants'
 
 interface FormState {
   name: string
@@ -38,7 +39,7 @@ interface Props {
 
 export default function ContactForm({ variant = 'dark', title, subtitle }: Props) {
   const [form, setForm] = useState<FormState>(initial)
-  const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
 
   const dark = variant === 'dark'
 
@@ -46,14 +47,34 @@ export default function ContactForm({ variant = 'dark', title, subtitle }: Props
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setStatus('sending')
-    setTimeout(() => {
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
+          subject: `Yeni Başvuru — ${form.name}`,
+          from_name: 'Şirvan Ekürisi Web',
+          name: form.name,
+          phone: form.phone,
+          email: form.email,
+          program: form.program,
+          message: form.message,
+        }),
+      })
+      const data = await res.json()
+      if (!res.ok || !data.success) throw new Error(data.message ?? 'submit failed')
+
+      // Yalnızca gönderim başarılıysa dönüşüm event'ini gönder.
       setStatus('sent')
       trackLead()
       setForm(initial)
-    }, 700)
+    } catch {
+      setStatus('error')
+    }
   }
 
   if (status === 'sent') {
@@ -104,6 +125,12 @@ export default function ContactForm({ variant = 'dark', title, subtitle }: Props
         <SelectField label="İlgilendiğiniz Program" name="program" value={form.program} onChange={onChange} options={PROGRAMS} className="sm:col-span-2" dark={dark} />
         <TextAreaField label="Mesajınız" name="message" value={form.message} onChange={onChange} rows={4} className="sm:col-span-2" dark={dark} />
       </div>
+
+      {status === 'error' ? (
+        <p className={cn('mt-8 text-[13px] leading-relaxed', dark ? 'text-red-300' : 'text-red-600')} role="alert">
+          Mesajınız gönderilemedi. Lütfen tekrar deneyin veya {CONTACT.phone} numaralı telefondan bize ulaşın.
+        </p>
+      ) : null}
 
       <div className="mt-10 flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
         <p className={cn('text-[10px] uppercase tracking-wider-2', dark ? 'text-cream/35' : 'text-ink/40')}>
