@@ -1,4 +1,4 @@
-type AnalyticsEvent = 'phone_click' | 'whatsapp_click' | 'generate_lead'
+type AnalyticsEvent = 'phone_click' | 'whatsapp_click' | 'contact_form_submit'
 
 type EventParams = Record<string, unknown>
 
@@ -28,7 +28,11 @@ export function trackWhatsappClick() {
   pushEvent('whatsapp_click')
 }
 
-/** İletişim formu başarıyla gönderildiğinde `generate_lead` event'ini gönderir. */
-export function trackLead(params: EventParams = {}) {
-  pushEvent('generate_lead', params)
+/** İletişim formu başarıyla gönderildiğinde `contact_form_submit` event'ini gönderir. */
+export function trackContactFormSubmit() {
+  pushEvent('contact_form_submit', {
+    form_name: 'contact',
+    lead_type: 'reservation',
+    success: true,
+  })
 }

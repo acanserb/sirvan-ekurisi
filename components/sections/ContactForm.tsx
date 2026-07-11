@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { ArrowRight, CheckCircle2 } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
-import { trackLead } from '@/lib/analytics'
+import { trackContactFormSubmit } from '@/lib/analytics'
 import { CONTACT } from '@/lib/constants'
 
 interface FormState {
@@ -70,7 +70,7 @@ export default function ContactForm({ variant = 'dark', title, subtitle }: Props
 
       // Yalnızca gönderim başarılıysa dönüşüm event'ini gönder.
       setStatus('sent')
-      trackLead()
+      trackContactFormSubmit()
       setForm(initial)
     } catch {
       setStatus('error')
